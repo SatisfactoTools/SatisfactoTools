@@ -77,7 +77,7 @@
 	}
 
 	class Producer{
-		int Recipe[] recipes
+		Recipe[] recipes
 	}
 
 	Building --|> Producer
