@@ -1,0 +1,93 @@
+@startuml BDD
+
+class users{
+	int id
+	string pseudo
+	string email
+	string password
+}
+
+class games{
+	int id
+	int user_id
+	string name
+}
+
+games "1,1" -- "0,n" users
+
+class buildings{
+	int id
+	string name
+	string img
+	double electricity
+}
+
+class resource_types{
+	int id
+	string name
+	string unity
+}
+
+class resources{
+	int id
+	string name
+	string img
+}
+
+resource_types "0,n" -- "1,1" resources
+
+class recipes{
+	int id
+	string name
+}
+
+class recipe_resource{
+	int id
+	int recipe_id
+	int resource_id
+	double quantity
+}
+
+class building_recipe{
+	int id
+	int recipe_id
+	int building_id
+}
+
+recipe_resource "1,1" -- "0,n" resources
+recipe_resource "1,1" -- "0,n" recipes
+
+building_recipe "1,1" -- "0,n" buildings
+building_recipe "1,1" -- "0,n" recipes
+
+
+class production_blocs{
+	int id
+	int game_id
+	string name
+}
+
+production_blocs "1,1" -- "0,n" games
+production_blocs "0,n" -- "1,1" production_blocs
+
+class production_unites{
+	int id
+	int recipe_id
+	int production_bloc_id
+	int building_id
+	string name
+}
+
+production_blocs "1,n" -- "0,1" production_unites
+production_unites "1,1" -- "0,n" buildings
+
+class electrivity_unites{
+	int id
+	int building_id
+	string name
+}
+
+production_blocs "1,n" -- "0,1" electrivity_unites
+electrivity_unites "1,1" -- "0,n" buildings
+
+@enduml

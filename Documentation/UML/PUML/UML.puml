@@ -1,0 +1,92 @@
+@startuml SatisfactoTools
+
+	class User{
+		int id
+		string name
+		string lastName
+		string email
+		string password
+	}
+
+	class Production{
+		int id
+		User creator
+		string name
+	}
+
+	User -- Production
+
+	class ObjectType{
+		int id 
+		string name
+	}
+
+	class Object{
+		int id
+		ObjectType type
+		string name
+		string imgUrl
+		string iconUrl
+	}
+
+	Object -- ObjectType
+
+	class Resource{
+		int id
+		string name
+	}
+
+	Object --|> Resource
+
+	class Input{
+		int id
+		decimal quantity
+	}
+
+	Resource --|> Input
+
+	class Output{
+		int id
+		decimal quantity
+	}
+
+	Resource --|> Output
+
+	BuildingType -- Building
+	Object --|> Building
+
+	class Recipe{
+		int id
+		Input[] inputs
+		Output[] outputs
+		Time cycleDuration
+	}
+
+	Input -- Recipe
+	Output -- Recipe
+
+	class BuildingType{
+		int id
+		string name
+	}
+
+	class Building{
+		int id
+		BuildingType type
+		string name
+	}
+
+	class Producer{
+		Recipe[] recipes
+	}
+
+	Building --|> Producer
+	Recipe -- Producer
+
+	class Decoration{
+		string name
+	}
+
+	Building --|> Decoration
+
+@enduml
