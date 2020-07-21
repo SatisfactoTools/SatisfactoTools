@@ -19,4 +19,9 @@ class Game extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function productionBlocs()
+    {
+            return $this->hasMany('App\Models\ProductionBloc');
+    }
 }
