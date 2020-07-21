@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductionBlocSeeder::class);
         $this->call(ResourceTypeSeeder::class);
         $this->call(ResourceSeeder::class);
+        $this->call(RecipeSeeder::class);
     }
 }
