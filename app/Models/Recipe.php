@@ -16,4 +16,9 @@ class Recipe extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function recipeResources()
+    {
+        return $this->hasMany('App\Models\RecipeResource');
+    }
 }
