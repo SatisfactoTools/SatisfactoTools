@@ -26,4 +26,9 @@ class Building extends Model
     {
         return $this->hasMany('App\Models\ElectricityUnite');
     }
+
+    public function productionUnite()
+    {
+        return $this->belongsTo('App\Models\ProductionUnite');
+    }
 }

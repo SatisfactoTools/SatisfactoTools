@@ -19,4 +19,9 @@ class ProductionBloc extends Model
     {
         return $this->belongsTo('App\Models\Game');
     }
+
+    public function productionUnites()
+    {
+        return $this->belongsTo('App\Models\ProductionUnite');
+    }
 }

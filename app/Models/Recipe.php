@@ -26,4 +26,9 @@ class Recipe extends Model
     {
         return $this->hasMany("App\Models\Building");
     }
+
+    public function productionUnite()
+    {
+        return $this->belongsTo('App\Models\ProductionUnite');
+    }
 }
