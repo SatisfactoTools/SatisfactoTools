@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Building extends Model
+class BuildingRecipe extends Model
 {
     public $timestamps = false;
     
@@ -14,16 +14,16 @@ class Building extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'img', 'electricity',
+        'recipe_id', 'building_id',
     ];
 
-    public function recipes()
+    public function building()
     {
-        return $this->hasMany("App\Models\Recipe");
+        return $this->belongsTo("App\Models\Building");
     }
 
-    public function electricityUnites()
+    public function recipe()
     {
-        return $this->hasMany('App\Models\ElectricityUnite');
+        return $this->belongsTo("App\Models\Recipe");
     }
 }

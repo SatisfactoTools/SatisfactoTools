@@ -19,5 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RecipeSeeder::class);
         $this->call(RecipeResourceSeeder::class);
         $this->call(BuildingSeeder::class);
+        $this->call(BuildingRecipeSeeder::class);
+        $this->call(ElectricityUniteSeeder::class);
     }
 }

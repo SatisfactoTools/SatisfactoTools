@@ -21,4 +21,9 @@ class Recipe extends Model
     {
         return $this->hasMany('App\Models\RecipeResource');
     }
+
+    public function buildings()
+    {
+        return $this->hasMany("App\Models\Building");
+    }
 }
