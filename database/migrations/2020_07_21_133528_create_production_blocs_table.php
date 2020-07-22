@@ -17,6 +17,7 @@ class CreateProductionBlocsTable extends Migration
             $table->id();
             $table->foreignId('game_id')->constrained('games');
             $table->string('name');
+            $table->foreignId('parent_id')->nullable()->constrained('production_blocs');
             $table->timestamps();
         });
     }
