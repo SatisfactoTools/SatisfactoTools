@@ -25,4 +25,13 @@ class GameTest extends TestCase
              ->assertStatus(200)
              ->assertJson($games->toArray());
     }
+
+    public function test_games_can_show_one()
+    {
+        $game = factory(Game::class)->create();
+
+        $this->getJson('/api/games/'. $game->id)
+             ->assertStatus(200)
+             ->assertJson($game->toArray());
+    }
 }
