@@ -9,7 +9,7 @@ use App\Models\Game;
 
 class GameTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithFaker;
 
     /**
      * A basic feature test example.
@@ -33,5 +33,17 @@ class GameTest extends TestCase
         $this->getJson('/api/games/'. $game->id)
              ->assertStatus(200)
              ->assertJson($game->toArray());
+    }
+
+    public function test_games_can_create()
+    {
+        $game = [
+            'user_id' => factory(\App\User::class)->create()->id,
+            'name' => $this->faker->name,
+        ];
+        
+        $this->postJson('/api/games', $game)
+             ->assertStatus(201)
+             ->assertJson($game);
     }
 }

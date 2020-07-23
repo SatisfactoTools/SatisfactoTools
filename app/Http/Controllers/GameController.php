@@ -18,16 +18,6 @@ class GameController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -35,7 +25,14 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $game = Game::create([
+            'user_id' => $request->user_id,
+            'name' => $request->name,
+        ]);
+        
+        $game->save();
+
+        return $game;
     }
 
     /**
