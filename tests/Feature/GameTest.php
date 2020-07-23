@@ -46,4 +46,34 @@ class GameTest extends TestCase
              ->assertStatus(201)
              ->assertJson($game);
     }
+
+    /**
+     * Test that games can be updated
+     *
+     * @return void
+     */
+    public function test_games_can_update()
+    {
+        $game_before_update = factory(Game::class)->create([
+            'user_id' => factory(\App\User::class)->create()->id
+        ]);
+
+        $game_update_data = [
+            'name' => "updated stuff"
+        ];
+
+        $game_updated = [
+            'user_id' => $game_before_update->user_id,
+            'name' => $game_update_data['name'],
+        ];
+
+        // Test that game can be updated
+        $this->putJson('/api/games/'. $game_before_update->id, $game_update_data)
+             ->assertStatus(200)
+             ->assertJson(['message' => "Game successfully updated"]);
+
+        // Test that game is correctly updated
+        $this->getJson('/api/games/'. $game_before_update->id)
+             ->assertJson($game_updated);
+    }
 }

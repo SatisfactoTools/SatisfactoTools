@@ -21,3 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/games', 'GameController@index');
 Route::get('/games/{game}', 'GameController@show');
 Route::post('/games', 'GameController@store');
+Route::put('/games/{game}', 'GameController@update');
