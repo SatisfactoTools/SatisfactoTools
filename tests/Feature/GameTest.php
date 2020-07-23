@@ -76,4 +76,29 @@ class GameTest extends TestCase
         $this->getJson('/api/games/'. $game_before_update->id)
              ->assertJson($game_updated);
     }
+
+    /**
+     * Test that game can be deleted
+     *
+     * @return void
+     */
+    public function test_games_can_delete()
+    {
+        $game = factory(Game::class)->create([
+            'user_id' => factory(\App\User::class)->create()->id
+        ]);
+
+        // Test that can exist
+        $this->getJson('/api/games/'. $game->id)
+             ->assertJson($game->toArray());
+        
+        // Test that game can be deleted
+        $this->deleteJson('/api/games/'. $game->id)
+             ->assertStatus(200)
+             ->assertJson(['message' => "Game successfully deleted"]);
+        
+        // Test that check if game exist or not
+        $this->getJson('/api/games/'. $game->id)
+             ->assertJsonMissing($game->toArray());
+    }
 }
