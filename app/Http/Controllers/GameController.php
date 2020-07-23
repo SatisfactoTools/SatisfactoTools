@@ -14,17 +14,7 @@ class GameController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Game::all();
     }
 
     /**
@@ -35,7 +25,14 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $game = Game::create([
+            'user_id' => $request->user_id,
+            'name' => $request->name,
+        ]);
+        
+        $game->save();
+
+        return $game;
     }
 
     /**
@@ -46,18 +43,7 @@ class GameController extends Controller
      */
     public function show(Game $game)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Game  $game
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Game $game)
-    {
-        //
+        return $game;
     }
 
     /**
@@ -69,7 +55,10 @@ class GameController extends Controller
      */
     public function update(Request $request, Game $game)
     {
-        //
+        $game->name = $request->name;
+        $game->save();
+
+        return response()->json(['message' => "Game successfully updated"]);
     }
 
     /**
@@ -80,6 +69,8 @@ class GameController extends Controller
      */
     public function destroy(Game $game)
     {
-        //
+        $game->delete();
+
+        return response()->json(['message' => "Game successfully deleted"]); 
     }
 }
