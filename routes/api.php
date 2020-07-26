@@ -23,3 +23,9 @@ Route::get('/games/{game}', 'GameController@show');
 Route::post('/games', 'GameController@store');
 Route::put('/games/{game}', 'GameController@update');
 Route::delete('/games/{game}', 'GameController@destroy');
+
+Route::get('/production_blocs', 'ProductionBlocController@index');
+Route::get('/production_blocs/{production_bloc}', 'ProductionBlocController@show');
+Route::post('/production_blocs', 'ProductionBlocController@store');
+Route::put('/production_blocs/{production_bloc}', 'ProductionBlocController@update');
+Route::delete('/production_blocs/{production_bloc}', 'ProductionBlocController@destroy');
