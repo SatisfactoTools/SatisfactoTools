@@ -57,17 +57,6 @@ class ProductionBlocController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\ProductionBloc  $productionBloc
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ProductionBloc $productionBloc)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -76,7 +65,21 @@ class ProductionBlocController extends Controller
      */
     public function update(Request $request, ProductionBloc $productionBloc)
     {
-        //
+        try {
+            $game = Game::findOrFail($request->game_id);
+        } catch (ModelNotFoundException $exception) {
+            return response()->json([
+                'message' => "Game not found"
+            ], 404);
+        }
+
+        $productionBloc->game_id = $request->game_id;
+        $productionBloc->name = $request->name;
+        $productionBloc->save();
+
+        return response()->json([
+            'message' => "Production bloc successfully updated"
+        ]);
     }
 
     /**
