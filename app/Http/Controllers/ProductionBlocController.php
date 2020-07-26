@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProductionBloc;
+use App\Models\Game;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProductionBlocController extends Controller
 {
@@ -18,16 +20,6 @@ class ProductionBlocController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -35,7 +27,22 @@ class ProductionBlocController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $game = Game::findOrFail($request->game_id);
+        } catch (ModelNotFoundException $exception) {
+            return response()->json([
+                'message' => "Game not found"
+            ], 404);
+        }
+
+        $productionBloc = ProductionBloc::create([
+            'game_id' => $request->game_id,
+            'name' => $request->name
+        ]);
+
+        $productionBloc->save();
+
+        return $productionBloc;
     }
 
     /**
