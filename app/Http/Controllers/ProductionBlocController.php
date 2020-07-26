@@ -46,7 +46,7 @@ class ProductionBlocController extends Controller
      */
     public function show(ProductionBloc $productionBloc)
     {
-        //
+        return $productionBloc;
     }
 
     /**

@@ -12,7 +12,7 @@ class ProductionBlocTest extends TestCase
     use RefreshDatabase, WithFaker;
 
     /**
-     * Test that production bloc
+     * Test that production bloc can list
      *
      * @return void
      */
@@ -25,7 +25,21 @@ class ProductionBlocTest extends TestCase
              ->assertJson($productionBlocs->toArray());
     }
 
-    // Test liste des blocs
+    /**
+     * Test that production bloc can show one 
+     *
+     * @return void
+     */
+    public function test_production_bloc_can_show_one()
+    {
+        $productionBloc = factory(ProductionBloc::class)->create();
+
+        $this->get('/api/production_blocs/' .$productionBloc->id)
+             ->assertStatus(200)
+             ->assertJson($productionBloc->toArray());
+    }
+
+
     // Test affichage un bloc
     // Test creation bloc
     // Test modif bloc
