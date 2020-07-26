@@ -125,5 +125,34 @@ class ProductionBlocTest extends TestCase
              ->assertJson($productionBloc_before_update->toArray());
     }
 
-    // Test suppression bloc
+    /**
+     * Test that production bloc can be deleted
+     *
+     * @return void
+     */
+    public function test_production_bloc_can_delete()
+    {
+        $productionBloc = factory(ProductionBloc::class)->create();
+
+        // Assert that production bloc has been deleted
+        $this->deleteJson('/api/production_blocs/' .$productionBloc->id)
+             ->assertStatus(200)
+             ->assertJson(['message' => "Production bloc successfully deleted"]);
+        
+        // Assert that production bloc does not exist anymore
+        $this->getJson('/api/production_blocs/' .$productionBloc->id)
+             ->assertJsonMissing($productionBloc->toArray());
+
+    }
+
+    /**
+     * Test that production bloc can send error when given wrong production bloc id
+     *
+     * @return void
+     */
+    public function test_production_bloc_can_send_error_with_wrong_production_bloc_id_when_delete()
+    {
+        $this->deleteJson('/api/production_blocs/' . "5")
+             ->assertStatus(404);
+    }
 }

@@ -90,6 +90,10 @@ class ProductionBlocController extends Controller
      */
     public function destroy(ProductionBloc $productionBloc)
     {
-        //
+        $productionBloc->delete();
+
+        return response()->json([
+            'message' => "Production bloc successfully deleted"
+        ]);
     }
 }
