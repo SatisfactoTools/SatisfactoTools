@@ -14,7 +14,7 @@ class ProductionBlocController extends Controller
      */
     public function index()
     {
-        //
+        return ProductionBloc::all();
     }
 
     /**
