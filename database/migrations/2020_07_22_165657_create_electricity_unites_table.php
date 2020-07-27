@@ -15,7 +15,7 @@ class CreateElectricityUnitesTable extends Migration
     {
         Schema::create('electricity_unites', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('building_id')->constrained('buildings');
+            $table->foreignId('building_id')->constrained('buildings')->onDelete('cascade');
             $table->string('name');
             $table->timestamps();
         });

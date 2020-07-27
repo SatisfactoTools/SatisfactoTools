@@ -15,8 +15,8 @@ class CreateRecipeResourcesTable extends Migration
     {
         Schema::create('recipe_resources', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('recipe_id')->constrained('recipes');
-            $table->foreignId('resource_id')->constrained('resources');
+            $table->foreignId('recipe_id')->constrained('recipes')->onDelete('cascade');
+            $table->foreignId('resource_id')->constrained('resources')->onDelete('cascade');
             $table->float('quantity', 5, 2);
         });
     }
