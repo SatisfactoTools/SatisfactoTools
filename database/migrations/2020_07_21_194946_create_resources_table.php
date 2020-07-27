@@ -17,7 +17,7 @@ class CreateResourcesTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('img');
-            $table->foreignId('resource_type_id')->constrained('resource_types');
+            $table->foreignId('resource_type_id')->constrained('resource_types')->onDelete('cascade');
         });
     }
 

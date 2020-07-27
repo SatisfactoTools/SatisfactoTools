@@ -15,7 +15,7 @@ class CreateProductionBlocsTable extends Migration
     {
         Schema::create('production_blocs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('game_id')->constrained('games');
+            $table->foreignId('game_id')->constrained('games')->onDelete('cascade');
             $table->string('name');
             $table->foreignId('parent_id')->nullable()->constrained('production_blocs');
             $table->timestamps();

@@ -15,9 +15,9 @@ class CreateProductionUnitesTable extends Migration
     {
         Schema::create('production_unites', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('recipe_id')->constrained('recipes');
-            $table->foreignId('production_bloc_id')->constrained('production_blocs');
-            $table->foreignId('building_id')->constrained('buildings');
+            $table->foreignId('recipe_id')->constrained('recipes')->onDelete('cascade');
+            $table->foreignId('production_bloc_id')->constrained('production_blocs')->onDelete('cascade');
+            $table->foreignId('building_id')->constrained('buildings')->onDelete('cascade');
             $table->string('name');
             $table->timestamps();
         });

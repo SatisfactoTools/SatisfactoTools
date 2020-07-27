@@ -15,8 +15,8 @@ class CreateBuildingRecipesTable extends Migration
     {
         Schema::create('building_recipes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('recipe_id')->constrained('recipes');
-            $table->foreignId('building_id')->constrained('buildings');
+            $table->foreignId('recipe_id')->constrained('recipes')->onDelete('cascade');
+            $table->foreignId('building_id')->constrained('buildings')->onDelete('cascade');
         });
     }
 
