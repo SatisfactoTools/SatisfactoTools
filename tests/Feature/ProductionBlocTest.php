@@ -155,4 +155,88 @@ class ProductionBlocTest extends TestCase
         $this->deleteJson('/api/production_blocs/' . "5")
              ->assertStatus(404);
     }
+
+    /**
+     * Test that production bloc can be connected to another production bloc
+     *
+     * @return void
+     */
+    public function test_production_bloc_can_be_connect_to_another_production_bloc()
+    {
+        $productionBloc_parent = factory(ProductionBloc::class)->create();
+        $productionBloc_child = factory(ProductionBloc::class)->create();
+
+        $this->postJson('/api/production_blocs/' . $productionBloc_parent->id . '/connect/' . $productionBloc_child->id)
+             ->assertStatus(200)
+             ->assertJson(['message' => "Production blocs successfully connected"]);
+    }
+
+    /**
+     * Test that production bloc can show a child
+     *
+     * @return void
+     */
+    public function test_production_bloc_can_show_child()
+    {
+        $productionBloc_parent = factory(ProductionBloc::class)->create();
+        $productionBloc_child = factory(ProductionBloc::class)->create();
+
+        $this->postJson('/api/production_blocs/' . $productionBloc_parent->id . '/connect/' . $productionBloc_child->id);
+
+        $productionBloc_child->parent_id = $productionBloc_parent->id;
+
+        $this->getJson('/api/production_blocs/' . $productionBloc_parent->id . '/children')
+             ->assertStatus(200)
+             ->assertJson([$productionBloc_child->toArray()]);
+    }
+
+    /**
+     * Test that production bloc can show children
+     *
+     * @return void
+     */
+    public function test_production_bloc_can_show_children()
+    {
+        $productionBloc_parent = factory(ProductionBloc::class)->create();
+
+        $productionBloc_child1 = factory(ProductionBloc::class)->create();
+        $productionBloc_child2 = factory(ProductionBloc::class)->create();
+        $productionBloc_child3 = factory(ProductionBloc::class)->create();
+
+        $this->postJson('/api/production_blocs/' . $productionBloc_parent->id . '/connect/' . $productionBloc_child1->id);
+        $this->postJson('/api/production_blocs/' . $productionBloc_parent->id . '/connect/' . $productionBloc_child2->id);
+        $this->postJson('/api/production_blocs/' . $productionBloc_parent->id . '/connect/' . $productionBloc_child3->id);
+
+        $productionBloc_child1->parent_id = $productionBloc_parent->id;
+        $productionBloc_child2->parent_id = $productionBloc_parent->id;
+        $productionBloc_child3->parent_id = $productionBloc_parent->id;
+
+        $this->getJson('/api/production_blocs/' . $productionBloc_parent->id . '/children')
+             ->assertStatus(200)
+             ->assertJson([
+                 $productionBloc_child1->toArray(),
+                 $productionBloc_child2->toArray(),
+                 $productionBloc_child3->toArray()
+             ]);
+    }
+
+    /**
+     * Test that production bloc can show his parent
+     *
+     * @return void
+     */
+    public function test_production_bloc_can_show_parent()
+    {
+        $productionBloc_parent = factory(ProductionBloc::class)->create();
+        $productionBloc_child = factory(ProductionBloc::class)->create();
+
+        $this->postJson('/api/production_blocs/' . $productionBloc_parent->id . '/connect/' . $productionBloc_child->id);
+
+        $productionBloc_child->parent_id = $productionBloc_parent->id;
+
+        $this->getJson('/api/production_blocs/' .$productionBloc_child->id ."/parent")
+             ->assertStatus(200)
+             ->assertJson($productionBloc_parent->toArray());
+    }
+
 }

@@ -96,4 +96,24 @@ class ProductionBlocController extends Controller
             'message' => "Production bloc successfully deleted"
         ]);
     }
+
+    public function connect(ProductionBloc $productionBloc, ProductionBloc $pdToConnect)
+    {
+        $pdToConnect->parent_id = $productionBloc->id;
+        $pdToConnect->save();
+
+        return response()->json([
+            'message' => "Production blocs successfully connected"
+        ]);
+    }
+
+    public function showChildren(ProductionBloc $productionBloc)
+    {
+        return $productionBloc->children;
+    }
+
+    public function showParent(ProductionBloc $productionBloc)
+    {
+        return $productionBloc->parent;
+    }
 }

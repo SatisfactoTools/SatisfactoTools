@@ -29,3 +29,6 @@ Route::get('/production_blocs/{production_bloc}', 'ProductionBlocController@show
 Route::post('/production_blocs', 'ProductionBlocController@store');
 Route::put('/production_blocs/{production_bloc}', 'ProductionBlocController@update');
 Route::delete('/production_blocs/{production_bloc}', 'ProductionBlocController@destroy');
+Route::post('/production_blocs/{production_bloc}/connect/{pd_to_connect}', 'ProductionBlocController@connect');
+Route::get('/production_blocs/{production_bloc}/children', 'ProductionBlocController@showChildren');
+Route::get('/production_blocs/{production_bloc}/parent', 'ProductionBlocController@showParent');
