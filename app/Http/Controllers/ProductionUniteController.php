@@ -25,7 +25,16 @@ class ProductionUniteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $productionUnite = ProductionUnite::create([
+            'recipe_id' => $request->recipe_id,
+            'building_id' => $request->building_id,
+            'production_bloc_id' => $request->production_bloc_id,
+            'name' => $request->name
+        ]);
+
+        $productionUnite->save();
+
+        return $productionUnite;
     }
 
     /**

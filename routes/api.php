@@ -35,3 +35,4 @@ Route::get('/production_blocs/{production_bloc}/parent', 'ProductionBlocControll
 Route::get('/production_blocs/{production_bloc}/production_unites', 'ProductionBlocController@showProductionUnites');
 
 Route::get('/production_unites/{production_unite}', 'ProductionUniteController@show');
+Route::post('/production_unites', 'ProductionUniteController@store');
