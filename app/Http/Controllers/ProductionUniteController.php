@@ -104,6 +104,10 @@ class ProductionUniteController extends Controller
      */
     public function destroy(ProductionUnite $productionUnite)
     {
-        //
+        $productionUnite->delete();
+
+        return response()->json([
+            'message' => 'Production Unite successfully deleted'
+        ]);
     }
 }

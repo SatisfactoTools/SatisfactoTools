@@ -160,5 +160,36 @@ class ProductionUniteTest extends TestCase
              ->assertJson($productionUnite_before_update->toArray());
     }
 
-    // test production unite can be deleted
+    /**
+     * Test that production unite can be deleted
+     *
+     * @return void
+     */
+    public function test_production_unite_can_delete()
+    {
+        $productionUnite = factory(ProductionUnite::class)->create();
+
+        // Assert that production unite has been deleted
+        $this->deleteJson('/api/production_unites/' . $productionUnite->id)
+             ->assertStatus(200)
+             ->assertJson([
+                 'message' => 'Production Unite successfully deleted'
+             ]);
+        
+        // Assert that production unite doesn't exist anymore
+        $this->getJson('/api/production_unites/' . $productionUnite->id)
+             ->assertStatus(404)
+             ->assertJsonMissing($productionUnite->toArray());
+    }
+
+    /**
+     * Test that production unite can send error when giving wrong production unite id
+     *
+     * @return void
+     */
+    public function test_production_unite_send_error_with_wrong_production_unite_id_when_delete()
+    {
+        $this->deleteJson('/api/production_unites/' . "5")
+             ->assertStatus(404);
+    }
 }
