@@ -33,3 +33,5 @@ Route::post('/production_blocs/{production_bloc}/connect/{pd_to_connect}', 'Prod
 Route::get('/production_blocs/{production_bloc}/children', 'ProductionBlocController@showChildren');
 Route::get('/production_blocs/{production_bloc}/parent', 'ProductionBlocController@showParent');
 Route::get('/production_blocs/{production_bloc}/production_unites', 'ProductionBlocController@showProductionUnites');
+
+Route::get('/production_unites/{production_unite}', 'ProductionUniteController@show');
