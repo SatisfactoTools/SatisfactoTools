@@ -116,4 +116,9 @@ class ProductionBlocController extends Controller
     {
         return $productionBloc->parent;
     }
+
+    public function showProductionUnites(ProductionBloc $productionBloc)
+    {
+        return $productionBloc->productionUnites;
+    }
 }

@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\ProductionBloc;
+use App\Models\ProductionUnite;
 
 class ProductionBlocTest extends TestCase
 {
@@ -237,6 +238,18 @@ class ProductionBlocTest extends TestCase
         $this->getJson('/api/production_blocs/' .$productionBloc_child->id ."/parent")
              ->assertStatus(200)
              ->assertJson($productionBloc_parent->toArray());
+    }
+
+    public function test_production_bloc_can_list_production_unites()
+    {
+        $productionBloc = factory(ProductionBloc::class)->create();
+        $productionUnites = factory(ProductionUnite::class, 5)->create([
+            'production_bloc_id' => $productionBloc->id
+        ]);
+
+        $this->getJson('/api/production_blocs/' . $productionBloc->id . '/production_unites')
+             ->assertStatus(200)
+             ->assertJson($productionUnites->toArray());
     }
 
 }
