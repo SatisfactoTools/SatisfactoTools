@@ -22,7 +22,7 @@ class ProductionBloc extends Model
 
     public function productionUnites()
     {
-        return $this->belongsTo('App\Models\ProductionUnite');
+        return $this->hasMany('App\Models\ProductionUnite');
     }
 
     public function parent()
