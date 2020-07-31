@@ -36,3 +36,4 @@ Route::get('/production_blocs/{production_bloc}/production_unites', 'ProductionB
 
 Route::get('/production_unites/{production_unite}', 'ProductionUniteController@show');
 Route::post('/production_unites', 'ProductionUniteController@store');
+Route::put('/production_unites/{production_unite}', 'ProductionUniteController@update');
