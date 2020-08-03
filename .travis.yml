@@ -1,0 +1,33 @@
+language: php
+sudo: required
+dist: trusty
+
+php:
+    - 7.1
+    - 7.2
+    - 7.3
+
+services:
+    - mysql
+
+cache:
+    directories:
+        - $HOME/.composer/cache
+install:
+    - cp .env.travis .env
+    - composer install --no-progress --no-interaction --prefer-dist --no-suggest
+    - mysql -e 'CREATE DATABASE satisfactotools;'
+    - php artisan key:generate
+
+script:
+    - php artisan migrate:install
+    - php artisan migrate:fresh --seed
+    - php artisan test
+    
+branches:
+  only:
+    - master
+    - /^V.*$/
+
+notifications:
+    email: false
