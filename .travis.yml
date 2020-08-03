@@ -1,6 +1,6 @@
 language: php
-sudo: required
 dist: trusty
+os: linux
 
 php:
     - 7.3
