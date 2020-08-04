@@ -18,6 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/users/{user}/logs', 'LogController@showLogsUser');
+
 Route::get('/games', 'GameController@index');
 Route::get('/games/{game}', 'GameController@show');
 Route::post('/games', 'GameController@store');

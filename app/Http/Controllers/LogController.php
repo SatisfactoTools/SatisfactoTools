@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Log;
+use App\User;
 use Illuminate\Http\Request;
 
 class LogController extends Controller
@@ -15,16 +16,6 @@ class LogController extends Controller
     public function index()
     {
         return Log::all();
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -50,17 +41,6 @@ class LogController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Log  $log
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Log $log)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -81,5 +61,16 @@ class LogController extends Controller
     public function destroy(Log $log)
     {
         //
+    }
+
+    /**
+     * Show all logs related to this user
+     *
+     * @param User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function showLogsUser(User $user)
+    {
+        return $user->logs;
     }
 }
