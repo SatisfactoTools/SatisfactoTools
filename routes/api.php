@@ -38,3 +38,5 @@ Route::get('/production_unites/{production_unite}', 'ProductionUniteController@s
 Route::post('/production_unites', 'ProductionUniteController@store');
 Route::put('/production_unites/{production_unite}', 'ProductionUniteController@update');
 Route::delete('/production_unites/{production_unite}', 'ProductionUniteController@destroy');
+
+Route::get('/logs', 'LogController@index');
