@@ -32,4 +32,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Game');
     }
+
+    public function logs()
+    {
+        return $this->hasMany('App\Models\Log');
+    }
 }

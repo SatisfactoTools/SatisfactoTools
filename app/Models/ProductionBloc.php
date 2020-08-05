@@ -15,6 +15,10 @@ class ProductionBloc extends Model
         'game_id', 'name',
     ];
 
+    protected $with = [
+        'game.user'
+    ];
+
     public function game()
     {
         return $this->belongsTo('App\Models\Game');

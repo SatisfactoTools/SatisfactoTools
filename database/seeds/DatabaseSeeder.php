@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(BuildingRecipeSeeder::class);
         $this->call(ElectricityUniteSeeder::class);
         $this->call(ProductionUniteSeeder::class);
+        $this->call(LogSeeder::class);
     }
 }
